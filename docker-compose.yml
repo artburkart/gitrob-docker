@@ -1,0 +1,21 @@
+gitrob:
+  restart: always
+  image: gitrob
+  ports:
+    - "9393"
+  links:
+    - postgres:postgres
+  env_file: .env
+
+postgres:
+  image: postgres:9.4
+  ports:
+    - "5432"
+  volumes_from:
+    - data
+
+data:
+  image: busybox
+  volumes:
+    - /var/lib/postgresql
+  command: "true"
